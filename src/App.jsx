@@ -22,6 +22,27 @@ const Avg = ({good, neut, bad}) => <div>avergae {(good* 1 + bad * -1)/(good + ba
 
 const Pos = ({good, neut, bad}) => <div>avergae {(good)/(good + bad + neut) * 100} %</div>
 
+const Statistics = ({good, neut, bad}) => {
+  if (good + bad + neut > 0) {
+    return (
+      <div>
+        <Stats name="good" counter={good}/>
+        <Stats name="neutral" counter={neut}/>
+        <Stats name="bad" counter={bad}/>
+        <All total={good+neut+bad}/>
+        <Avg good={good} neut={neut} bad={bad}/>
+        <Pos good={good} neut={neut} bad={bad}/>
+      </div>
+    )
+  }
+  else {
+    return (
+      <div>No feedback given</div>
+    )
+  }
+  
+}
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -53,14 +74,8 @@ const App = () => {
         statistics
       </h1>
 
-      <div>
-        <Stats name="good" counter={good}/>
-        <Stats name="neutral" counter={neutral}/>
-        <Stats name="bad" counter={bad}/>
-        <All total={good+neutral+bad}/>
-        <Avg good={good} neut={neutral} bad={bad}/>
-        <Pos good={good} neut={neutral} bad={bad}/>
-      </div>
+      <Statistics good={good} neut={neutral} bad={bad}/>
+
 
     </div>
     
