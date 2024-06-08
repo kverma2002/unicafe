@@ -10,29 +10,32 @@ const Button = ({name, handleClick}) => {
 
 const Stats = ({name, counter}) => {
   return (
-    <div>
-      {name} {counter}
-    </div>
+    <tr>
+      <td>{name}</td> 
+      <td>{counter}</td>
+    </tr>
   )
 }
 
-const All = ({total}) => <div>all {total} </div>
+const All = ({total}) => <tr><td>all</td><td>{total}</td></tr>
 
-const Avg = ({good, neut, bad}) => <div>avergae {(good* 1 + bad * -1)/(good + bad + neut)}</div>
+const Avg = ({good, neut, bad}) => <tr><td>average</td><td>{(good* 1 + bad * -1)/(good + bad + neut)}</td></tr>
 
-const Pos = ({good, neut, bad}) => <div>avergae {(good)/(good + bad + neut) * 100} %</div>
+const Pos = ({good, neut, bad}) => <tr><td>positive</td><td>{(good)/(good + bad + neut) * 100}%</td></tr>
 
 const Statistics = ({good, neut, bad}) => {
   if (good + bad + neut > 0) {
     return (
-      <div>
-        <Stats name="good" counter={good}/>
-        <Stats name="neutral" counter={neut}/>
-        <Stats name="bad" counter={bad}/>
-        <All total={good+neut+bad}/>
-        <Avg good={good} neut={neut} bad={bad}/>
-        <Pos good={good} neut={neut} bad={bad}/>
-      </div>
+      <table>
+        <tbody>
+          <Stats name="good" counter={good}/>
+          <Stats name="neutral" counter={neut}/>
+          <Stats name="bad" counter={bad}/>
+          <All total={good+neut+bad}/>
+          <Avg good={good} neut={neut} bad={bad}/>
+          <Pos good={good} neut={neut} bad={bad}/>
+        </tbody>
+      </table>
     )
   }
   else {
