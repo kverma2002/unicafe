@@ -16,6 +16,12 @@ const Stats = ({name, counter}) => {
   )
 }
 
+const All = ({total}) => <div>all {total} </div>
+
+const Avg = ({good, neut, bad}) => <div>avergae {(good* 1 + bad * -1)/(good + bad + neut)}</div>
+
+const Pos = ({good, neut, bad}) => <div>avergae {(good)/(good + bad + neut) * 100} %</div>
+
 const App = () => {
   // save clicks of each button to its own state
   const [good, setGood] = useState(0)
@@ -27,6 +33,8 @@ const App = () => {
   const handleNeutralClick = () => setNeutral(neutral + 1)
 
   const handleBadClick = () => setBad(bad + 1)
+
+
   
 
   return (
@@ -49,6 +57,9 @@ const App = () => {
         <Stats name="good" counter={good}/>
         <Stats name="neutral" counter={neutral}/>
         <Stats name="bad" counter={bad}/>
+        <All total={good+neutral+bad}/>
+        <Avg good={good} neut={neutral} bad={bad}/>
+        <Pos good={good} neut={neutral} bad={bad}/>
       </div>
 
     </div>
